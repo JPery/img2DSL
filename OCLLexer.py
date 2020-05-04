@@ -65,6 +65,8 @@ class OCLLexer(RegexLexer):
     _functions = [
         'oclIsTypeOf',
         'oclIsKindOf',
+        'oclIsUndefined',
+        'oclIsInvalid',
         'oclAsType',
         'oclIsNew',
         'allInstances',
