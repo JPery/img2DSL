@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+./generate.sh "DejavuMonoSans" "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+./generate.sh "DejavuSerif" "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"
+./generate.sh "RobotoRegular" "/usr/share/fonts/truetype/roboto/hinted/Roboto-Regular.ttf"
+./generate.sh "RobotoMedium" "/usr/share/fonts/truetype/roboto/hinted/Roboto-Medium.ttf"
+./generate.sh "RobotoItalic" "/usr/share/fonts/truetype/roboto/hinted/Roboto-Italic.ttf"
+./generate.sh "UbuntuMono" "/usr/share/fonts/truetype/ubuntu/UbuntuMono-R.ttf"
+./generate.sh "UbuntuRegular" "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf"
+./generate.sh "CourierPrimeBold" "/home/dejavu/Escritorio/cleanRepos/ocl-dataset/fonts/CourierPrime-Bold.ttf"
+./generate.sh "CourierPrimeRegular" "/home/dejavu/Escritorio/cleanRepos/ocl-dataset/fonts/CourierPrime-Regular.ttf"

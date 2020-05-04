@@ -1,0 +1,8 @@
+*.png
+*.txt
+*.json
+.idea/*
+__pycache__/*
+*.zip
+ocl-dataset/*
+use-*
