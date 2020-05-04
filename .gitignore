@@ -6,3 +6,4 @@ __pycache__/*
 *.zip
 ocl-dataset/*
 use-*
+!requirements.txt

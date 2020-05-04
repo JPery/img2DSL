@@ -1,0 +1,9 @@
+python-Levenshtein
+numpy
+matplotlib
+fuzzywuzzy
+pytesseract
+Pillow
+lxml
+pygments
+pyparsing
