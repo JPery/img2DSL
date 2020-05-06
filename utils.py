@@ -1,3 +1,23 @@
+import re
+from ftfy import fix_encoding
+
+chars = {
+     "\n": " ",
+     "\r": "",
+     "\t": " ",
+     "\u2018": "'",
+     "\u2019": "'",
+}
+
+def remove_whitespaces(a):
+    return re.sub(" +", " ", a)
+
+def delete_chars(a):
+    b = fix_encoding(remove_whitespaces(a))
+    for char_to_replace, replace in chars.items():
+        b = b.replace(char_to_replace, replace)
+    return b
+
 discarded_typographies = [
     "AmaticBold",
     "AmaticRegular",
