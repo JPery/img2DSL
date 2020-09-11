@@ -4,7 +4,6 @@ from multiprocessing import Pool, Manager
 import sys
 import json
 import time
-import numpy as np
 
 mng = Manager()
 out_path = sys.argv[1]

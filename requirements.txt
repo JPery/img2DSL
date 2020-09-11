@@ -1,3 +1,4 @@
+ftfy
 python-Levenshtein
 numpy
 matplotlib

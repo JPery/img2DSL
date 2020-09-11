@@ -1,15 +1,11 @@
 import json
 import traceback
-
-import numpy as np
 import pytesseract
 import re
-
-from Levenshtein._levenshtein import ratio, distance
+from Levenshtein._levenshtein import distance
 from PIL import Image
 from multiprocessing import Pool, Manager
 import sys
-import os
 import time
 from utils import parse_metamodel_keywords
 
