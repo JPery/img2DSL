@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "Converting ecores to JSON file..."
 python3 parseEcores.py
-echo "Loading exprssions into USE..."
+echo "Loading exprssions into USE... (this will take a while)"
 python3 parseUse.py
 
 echo "Creating default_punct model"
