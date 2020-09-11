@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ./generate.sh "DejavuMonoSans" "fonts/DejaVuSansMono.ttf" $1 $2
 ./generate.sh "DejavuSerif" "fonts/DejaVuSerif.ttf" $1 $2
-./generate.sh "RobotoRegular" "fonts/oboto-Regular.ttf" $1 $2
+./generate.sh "RobotoRegular" "fonts/Roboto-Regular.ttf" $1 $2
 ./generate.sh "RobotoMedium" "fonts/Roboto-Medium.ttf" $1 $2
 ./generate.sh "UbuntuMono" "fonts/UbuntuMono-R.ttf" $1 $2
 ./generate.sh "UbuntuRegular" "fonts/Ubuntu-R.ttf" $1 $2
