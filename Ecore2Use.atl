@@ -1,0 +1,232 @@
+-- @nsURI Ecore=http://www.eclipse.org/emf/2002/Ecore   
+-- @path Use=/Ecore2Use/Use.ecore
+
+
+module Ecore2Use;
+create OUT: Use from IN: Ecore;
+
+helper def: seenReferences : Ecore!EReferences = Sequence{};
+
+helper context Ecore!EAttribute def: getSimpleType: Use!SimpleType =
+    if (self.eAttributeType.instanceClassName = 'boolean') then
+        'Boolean'
+    else
+        if (self.eAttributeType.instanceClassName = 'java.lang.String' or self.eAttributeType.instanceClassName = 'char') then
+            'String'
+        else
+            if (self.eAttributeType.instanceClassName = 'double' or self.eAttributeType.instanceClassName = 'float' or self.eAttributeType.instanceClassName = 'long') then
+                'Real'
+            else
+                if (self.eAttributeType.instanceClassName = 'int') then
+                    'Integer'
+                else
+                    OclUndefined -- ATTENTION! If this else is executed, the chosen type is the first in the enumeration. In this case Integer
+                endif
+            endif
+        endif
+    endif;
+
+rule Package2Model {
+    from
+        p: Ecore!EPackage (    p.eSuperPackage = OclUndefined   ) 
+    to
+        m: Use!Model (
+            name <- p.name,
+            classes <- p.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EClass)),
+            enumerations <- p.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EEnum)),
+            associations <- p.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EClass)) -> collect (r | r.eReferences) -> flatten()
+                -> select(r | r.eOpposite = OclUndefined)
+        )
+    do{
+        for (ref in p.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EClass)) -> collect (r | r.eReferences) -> flatten() -> select(r | r.eOpposite <> OclUndefined)){
+                    if(thisModule.seenReferences.excludes(ref)){
+                        m.associations <- thisModule.BiDirectionalReference2Association(ref);
+                        thisModule.seenReferences <- thisModule.seenReferences.append(ref.eOpposite);
+                    }
+        }
+    }
+}
+
+rule Classes {
+    from
+        c1: Ecore!EClass
+    to
+        c2: Use!Class (
+            "abstract" <- c1."abstract",
+            name <- c1.name,
+            superClasses <- c1.eSuperTypes,
+            attributes <- c1.eAttributes
+        )
+}
+
+abstract rule Attributes{
+    from
+        a1: Ecore!EAttribute
+    to
+        a2: Use!Attribute (
+            name <- a1.name
+        )
+}
+
+abstract rule SingleValuedAttributes extends Attributes{
+    from
+        a1: Ecore!EAttribute (a1.upperBound = 1)
+    to
+}
+
+abstract rule MultiValuedAttributes extends Attributes {
+    from
+        a1: Ecore!EAttribute (a1.upperBound <> 1)
+    to
+        a2: Use!Attribute (
+            type <- a4
+        ),
+        a4: Use!CollectionType (
+            type <- if (a1."unique" and not a1.ordered) then
+                    'Set'
+                    else
+                        if (not a1."unique" and not a1.ordered) then
+                         'Bag'
+                        else
+                         'Sequence'
+                        endif
+                    endif
+        )
+}
+
+
+rule SingleValuedEnumAttributes extends SingleValuedAttributes {
+    from
+        a1: Ecore!EAttribute (a1.eAttributeType.oclIsTypeOf(Ecore!EEnum))
+    to
+        a2: Use!Attribute (
+            type <- a3
+        ),
+        a3: Use!EnumerationType (
+            enum <- a1.eAttributeType
+        )
+}
+
+rule SingleValuedPrimitiveAttributes extends SingleValuedAttributes{
+    from
+        a1: Ecore!EAttribute (not a1.eAttributeType.oclIsTypeOf(Ecore!EEnum))
+    to
+        a2: Use!Attribute (
+            type <- a3
+        ),
+        a3: Use!SimpleType (
+            type <- a1.getSimpleType
+        )
+}
+
+rule MultiValuedEnumAttributes extends MultiValuedAttributes {
+    from
+        a1: Ecore!EAttribute (a1.eAttributeType.oclIsTypeOf(Ecore!EEnum))
+    to
+        a2: Use!Attribute (),
+        a4: Use!CollectionType (
+            baseType <- a3   
+        ),
+        a3: Use!EnumerationType (
+            enum <- a1.eAttributeType
+        )
+}
+
+rule MultiValuedPrimitiveAttributes extends MultiValuedAttributes {
+    from
+        a1: Ecore!EAttribute (not a1.eAttributeType.oclIsTypeOf(Ecore!EEnum))
+    to
+        a2: Use!Attribute (),
+        a4: Use!CollectionType (
+            baseType <- a3
+        ),
+        a3: Use!SimpleType (
+            type <- a1.getSimpleType
+        )
+}
+
+rule CreateEnumerationType {
+    from
+        t: Ecore!EEnum
+    to
+        enum: Use!Enumeration (
+            name <- t.name,
+            literals <- t.eLiterals
+
+        )
+}
+
+rule Literals {
+    from
+        l1 : Ecore!EEnumLiteral
+    to
+        l2 : Use!Literal (
+            name <- l1.name
+        )
+}
+--
+rule UniDirectionalReference2Association{
+    from
+        r : Ecore!EReference (r.eOpposite.oclIsUndefined())
+    to
+        a : Use!Association (
+            name <- r.name,
+            kind <- if (r.containment) then 'Composition' else 'Association' endif,
+            role <- role2,
+            role <- role1
+        ),
+        role2 : Use!Role (
+            className <- r.eContainingClass,
+            lowerBound <- 0,
+            upperBound <- -1,
+            ordered <- false,
+            name <- r.name
+        ),
+        role1 : Use!Role (
+            className <- r.eReferenceType,
+            lowerBound <- r.lowerBound,
+            upperBound <- r.upperBound,
+            ordered <- r.ordered,
+            name <- r.name    
+        )
+}
+
+lazy rule BiDirectionalReference2Association{
+    from
+        r : Ecore!EReference
+    to
+        a : Use!Association (
+            name <- r.name,
+            kind <- if (r.containment) then 'Composition' else 'Association' endif,           
+            role <- if(r.containment)
+                    then Sequence{}.append(role2).append(role1)
+                    else Sequence{}.append(role1).append(role2)
+                    endif
+        ),
+        role1 : Use!Role (
+            className <- r.eReferenceType,
+            lowerBound <- r.lowerBound,
+            upperBound <- r.upperBound,
+            ordered <- r.ordered,
+            name <- r.name  
+        ),
+        role2 : Use!Role (
+            className <- r.eOpposite.eReferenceType,
+            lowerBound <- r.eOpposite.lowerBound,
+            upperBound <- r.eOpposite.upperBound,
+            ordered <- r.eOpposite.ordered,
+            name <- r.eOpposite.name
+        )
+}
+
+
+rule Operations {
+    from
+        op1 : Ecore!EOperation
+    to
+        op2 : Use!Operation (
+            name <- op1.name,
+            parameters <- OclUndefined,
+            type <- OclUndefined
+        )
+}

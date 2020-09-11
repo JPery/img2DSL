@@ -3,6 +3,7 @@ import json
 from multiprocessing import Pool
 import re
 import sys
+import os
 
 out_path = sys.argv[1]
 font_path = sys.argv[2]
@@ -38,6 +39,9 @@ def text_wrap(text, font, max_width):
 
 
 def do_create_image_from_expression(expression, file_name, padding=20):
+    if os.path.isfile(file_name):
+        print("%s already exists" % file_name)
+        return
     expression = expression.replace("\r", "")
     img = Image.new('RGB', (1680, 1050), (255, 255, 255))
     text = expression
