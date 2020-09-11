@@ -7,6 +7,7 @@ if [ ! -f "$2" ]; then
     echo "font_path '$2' does not exist"
     exit
 fi
+echo "Using font '$1'"
 mkdir -p $1
 mkdir -p $1/images
 python3.7 generate_image_from_expressions.py $1 $2

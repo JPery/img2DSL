@@ -8,10 +8,7 @@ import os
 out_path = sys.argv[1]
 font_path = sys.argv[2]
 
-if out_path == "GloriaHallelujah":
-    font = ImageFont.truetype(font_path, size=18)
-else:
-    font = ImageFont.truetype(font_path, size=20)
+font = ImageFont.truetype(font_path, size=20)
 
 def text_wrap(text, font, max_width):
     lines = []
@@ -40,7 +37,7 @@ def text_wrap(text, font, max_width):
 
 def do_create_image_from_expression(expression, file_name, padding=20):
     if os.path.isfile(file_name):
-        print("%s already exists" % file_name)
+        #print("%s already exists" % file_name)
         return
     expression = expression.replace("\r", "")
     img = Image.new('RGB', (1680, 1050), (255, 255, 255))
