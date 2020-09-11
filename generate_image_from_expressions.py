@@ -6,7 +6,11 @@ import sys
 
 out_path = sys.argv[1]
 font_path = sys.argv[2]
-font = ImageFont.truetype(font_path, size=20)
+
+if out_path == "GloriaHallelujah":
+    font = ImageFont.truetype(font_path, size=18)
+else:
+    font = ImageFont.truetype(font_path, size=20)
 
 def text_wrap(text, font, max_width):
     lines = []
@@ -16,6 +20,7 @@ def text_wrap(text, font, max_width):
     else:
         regexp = "[ =()[\]{}>\n]"
         l = re.findall(regexp, text)
+        l.append("")
         words = [x+y for x,y in zip(re.split(regexp, text), l)]
         i = 0
         while i < len(words):
@@ -34,7 +39,7 @@ def text_wrap(text, font, max_width):
 
 def do_create_image_from_expression(expression, file_name, padding=20):
     expression = expression.replace("\r", "")
-    img = Image.new('RGB', (1440, 900), (255, 255, 255))
+    img = Image.new('RGB', (1680, 1050), (255, 255, 255))
     text = expression
     lines = text_wrap(text, font, img.size[0] - padding)
     line_height = font.getsize('hg')[1]
@@ -50,7 +55,7 @@ def do_create_image_from_expression(expression, file_name, padding=20):
 i = 0
 
 pool = Pool()
-for item in json.load(open("expressions_v2.json")):
+for item in json.load(open("loaded_no_duplicated_filtered_expressions.json")):
     pool.apply_async(do_create_image_from_expression,
                      args=("context %s\ninv %s:\n%s" % (item['context'], item['inv'], item['expression']), out_path + "/images/%d.png" % i),
                      error_callback=lambda x: print(x))

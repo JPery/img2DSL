@@ -4,9 +4,16 @@ import os
 import json
 import re
 
+if os.path.isfile("filtered_expressions.json"):
+    print("filtered_expressions file already exists")
+    exit()
+
+
 OCL_EXPRESSIONS = []
 
-for ecore_file in glob.glob("ocl-dataset/dataset/repos/**/*.ecore", recursive=True):
+ecore_files = list(glob.glob("ocl-dataset/dataset/repos/**/*.ecore", recursive=True))
+
+for ecore_file in ecore_files:
     if os.path.isfile(ecore_file):
         try:
             doc = lxml.etree.XML(open(ecore_file, "r").read().encode("utf8"))
@@ -23,6 +30,6 @@ for ecore_file in glob.glob("ocl-dataset/dataset/repos/**/*.ecore", recursive=Tr
                                            'file': ecore_file
                                        })
         except Exception as _e:
-            print(_e)
+            pass
 
-json.dump(OCL_EXPRESSIONS, open("expressions_v2.json", "w"))
+json.dump(OCL_EXPRESSIONS, open("filtered_expressions.json", "w"))

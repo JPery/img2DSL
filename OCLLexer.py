@@ -48,7 +48,6 @@ class OCLLexer(RegexLexer):
         'endif',
         'enddefinitions',
         'endlibrary',
-        'let',
         'package',
         'endpackage',
         'static'
@@ -170,7 +169,7 @@ class OCLLexer(RegexLexer):
             (r'\\\n', Text),
             (r'\\', Text),
             (words(_operator, suffix=r'\b'), Operator.Word),
-            (r'<>|!=|==|->|<<|>>|\?|[-~+/*%=<>&^|.!]', Operator),
+            (r'::|<>|!=|==|->|<<|>>|\?|[-~+/*%=<>&^|.!]', Operator),
             include('keywords'),
             include('builtins'),
             include('name'),
