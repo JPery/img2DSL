@@ -4,6 +4,7 @@ from multiprocessing import Pool, Manager
 import sys
 import json
 import time
+import pyprind
 
 mng = Manager()
 out_path = sys.argv[1]
@@ -21,9 +22,11 @@ def do_recognize_in_process(index):
 max_id = len(json.load(open("loaded_no_duplicated_filtered_expressions.json")))
 
 pool = Pool(1)
+bar = pyprind.ProgBar(max_id, track_time=True, title='Recognizing expressions from images', bar_char='█', update_interval=1.)
 for i in range(max_id):
      pool.apply_async(do_recognize_in_process,
                       args=(i,),
+                      callback=lambda x: bar.update(),
                       error_callback=lambda x: print(x))
 pool.close()
 pool.join()

@@ -1,6 +1,6 @@
 *.png
 *.txt
-*.json
+*/matches.json
 .idea/*
 __pycache__/*
 *.zip

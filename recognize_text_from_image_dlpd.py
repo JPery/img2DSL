@@ -6,6 +6,7 @@ import json
 from utils import parse_metamodel_keywords
 import time
 import os
+import pyprind
 
 mng = Manager()
 sys.argv.append("DejavuMonoSans")
@@ -44,9 +45,11 @@ def do_recognize_in_process(index, ecore_file):
 matches = json.load(open("loaded_no_duplicated_filtered_expressions.json"))
 
 pool = Pool(1)
+bar = pyprind.ProgBar(max_id, track_time=True, title='Recognizing expressions from images', bar_char='█', update_interval=1.)
 for i, match in enumerate(matches):
     pool.apply_async(do_recognize_in_process,
                      args=(i, match['file'],),
+                     callback=lambda x: bar.update(),
                      error_callback=lambda x: print(x))
 pool.close()
 pool.join()

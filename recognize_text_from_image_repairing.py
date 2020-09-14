@@ -8,6 +8,7 @@ from multiprocessing import Pool, Manager
 import sys
 import time
 from utils import parse_metamodel_keywords
+import pyprind
 
 sys.argv.append("DejavuMonoSans")
 sys.argv.append("eng")
@@ -85,10 +86,12 @@ matches = json.load(open("loaded_no_duplicated_filtered_expressions.json"))
 
 oid = 0
 pool = Pool(1)
+bar = pyprind.ProgBar(len(matches), track_time=True, title='Recognizing expressions from images', bar_char='█', update_interval=1.)
 for i, match in enumerate(matches[oid:], start=oid):
 #for i, match in enumerate(matches[oid:], start=oid):
      pool.apply_async(do_recognize_in_process,
                       args=(i, match['file'], "context %s\ninv %s:\n%s" % (match['context'], match['inv'], match['expression'])),
+                      callback=lambda x: bar.update(),
                       error_callback=lambda x: print(x))#, callback=lambda x : print(x))
 pool.close()
 pool.join()
