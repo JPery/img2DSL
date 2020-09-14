@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import sys
+import pyprind
 
 temp_file = "temp/MM.use"
 
@@ -31,9 +32,11 @@ def load_expression_in_use(mm_path, expression):
 font = sys.argv[1]
 
 matches = json.load(open("%s/matches.json" % font))
+bar = pyprind.ProgBar(len(matches), track_time=True, title='Loading expressions', bar_char='█', update_interval=1.)
 for item in matches:
     if load_expression_in_use(item['file'], item['recognized_expression']):
         valid_expressions.append(item['id'])
+    bar.update()
 print("Valid expressions in '%s': %s" %(font, len(valid_expressions)))
 
 

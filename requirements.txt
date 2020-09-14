@@ -8,3 +8,4 @@ Pillow
 lxml
 pygments
 pyparsing
+pyprind

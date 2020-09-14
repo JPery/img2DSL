@@ -15,5 +15,4 @@ mkdir -p $1/recognized_text
 python3.7 $4.py $1 $3
 echo "Comparating expressions with recognized text"
 python3.7 comparate_expressions_with_recognized_text.py $1
-echo "Loading recognized text into USE"
 python3.7 parseUse_v2.py $1

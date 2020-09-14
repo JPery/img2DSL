@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 from utils import delete_chars
+import pyprind
 
 if os.path.isfile("loaded_no_duplicated_filtered_expressions.json"):
     print("loaded_no_duplicated_filtered_expressions file already exists")
@@ -33,10 +34,12 @@ def load_expression_in_use(mm_path, expression):
         conversion_errors += 1
         return False
 
+bar = pyprind.ProgBar(len(expressions), track_time=True, title='Filtering out invalid expressions', bar_char='█', update_interval=1.)
 for i, item in enumerate(expressions):
     gt_expression = delete_chars("context %s\ninv %s:\n%s" % (item['context'], item['inv'], item['expression']))
     if load_expression_in_use(item['file'], gt_expression):
         valid_expressions.append(i)
+    bar.update()
 print("%s parsing errors" % len(valid_expressions))
 valid_expressions = [expressions[i] for i in valid_expressions]
 
