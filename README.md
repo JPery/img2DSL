@@ -15,7 +15,7 @@ git clone --recurse-submodules https://github.com/JPery/img2OCL.git
 - Java >= 1.8
 - Python >= 3.6
 - [USE Tool](https://sourceforge.net/projects/useocl/) == 5.2.0 (You have to download and extract it into the project root folder)
-- [Tesseract](https://github.com/tesseract-ocr/tesseract/releases/tag/4.1.1) == 4.1.1
+- [Tesseract](https://github.com/tesseract-ocr/tesseract/releases/tag/4.1.1) == 4.1.1 and [Tesseract Trining Tools](https://tesseract-ocr.github.io/tessdoc/Compiling-%E2%80%93-GitInstallation.html#build-with-training-tools). 
 
 
 ## Installing Python dependencies
