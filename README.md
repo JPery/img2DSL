@@ -5,7 +5,7 @@
 - Clone repo with the following command in order to get the [ocl-dataset](https://github.com/tue-mdse/ocl-dataset) dependency
 
 ``
-git clone --recurse-submodules https://github.com/JPery/img2OCL.git
+git clone --recurse-submodules https://github.com/JPery/img2DSL.git
 ``
 ## Installing
 
