@@ -10,9 +10,9 @@ fi
 echo "Using font '$1'"
 mkdir -p $1
 mkdir -p $1/images
-python3.7 generate_image_from_expressions.py $1 $2
+python3 generate_image_from_expressions.py $1 $2
 mkdir -p $1/recognized_text
-python3.7 $4.py $1 $3
+python3 $4.py $1 $3
 echo "Comparating expressions with recognized text"
-python3.7 comparate_expressions_with_recognized_text.py $1
-python3.7 parseUse_v2.py $1
+python3 comparate_expressions_with_recognized_text.py $1
+python3 parseUse_v2.py $1
