@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+source env/bin/activate
 echo "Converting ecores to JSON file..."
 python3 parseEcores.py
 echo "Loading exprssions into USE... (this may take a while, please, be patient)"

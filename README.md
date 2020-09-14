@@ -8,21 +8,28 @@
 ``
 git clone --recurse-submodules https://github.com/JPery/img2OCL.git
 ``
+## Installing
 
-## Requirements
+In order to ease the installation of all requirements and dependencies we've created an ``install.sh`` file.
+
+But you can install this requirements and dependencies on your own:
+
+### Requirements
 
 - Ubuntu >= 18.04
 - Java >= 1.8
 - Python >= 3.6
 - [USE Tool](https://sourceforge.net/projects/useocl/) == 5.2.0 (You have to download and extract it into the project root folder)
-- [Tesseract](https://github.com/tesseract-ocr/tesseract/releases/tag/4.1.1) == 4.1.1 and [Tesseract Trining Tools](https://tesseract-ocr.github.io/tessdoc/Compiling-%E2%80%93-GitInstallation.html#build-with-training-tools). 
+- [Tesseract](https://github.com/tesseract-ocr/tesseract/releases/tag/4.1.1) == 4.1.1, [Tesseract Training Tools](https://tesseract-ocr.github.io/tessdoc/Compiling-%E2%80%93-GitInstallation.html#build-with-training-tools) and the [Tesseract eng language](https://github.com/tesseract-ocr/tessdata_best/raw/master/eng.traineddata) from the [tessdata_best repository](https://github.com/tesseract-ocr/tessdata_best).
 
 
-## Installing Python dependencies
+### Installing Python dependencies
 
 ``
 pip3 install -r requirements.txt
 ``
+
+
 
 ## Running
 
