@@ -32,13 +32,13 @@ pip3 install -r requirements.txt
 
 ## Running
 
-To run the experiments with the OCL dataset from [2], execute the process.sh script:
+To run the experiments with the OCL [dataset](https://ieeexplore.ieee.org/document/7962414) by Noten et al., execute the process.sh script:
 
 ``
 ./process.sh
 ``
 
-Note that the master branch contains the full OCL dataset from [2], which contains expressions that were not valid for our approach hence we did not use them in our paper [1]. To re-run the exact experiments that we present in our paper [1], please move to the branch SLE20-artifact.
+Note that the master branch contains the full OCL [dataset](https://ieeexplore.ieee.org/document/7962414), which contains expressions that were not valid for our approach hence we did not use them in our paper [1]. To re-run the exact experiments that we present in our paper [1], please move to the branch SLE20-artifact.
 
 # Citation
 
