@@ -5,9 +5,10 @@ import json
 import re
 
 if os.path.isfile("filtered_expressions.json"):
-    print("filtered_expressions file already exists")
+    print("Skipping Ecores parsing as 'filtered_expressions.json' file already exists")
     exit()
 
+print("Converting ecores to JSON file...")
 
 OCL_EXPRESSIONS = []
 

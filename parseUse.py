@@ -5,8 +5,10 @@ from utils import delete_chars
 import pyprind
 
 if os.path.isfile("loaded_no_duplicated_filtered_expressions.json"):
-    print("loaded_no_duplicated_filtered_expressions file already exists")
+    print("Skipping expression loading into USE as 'loaded_no_duplicated_filtered_expressions.json' file already exists")
     exit()
+
+print("Loading exprssions into USE... (this may take a while, please, be patient)")
 
 temp_file = "temp/MM.use"
 expressions = json.load(open("filtered_expressions.json"))

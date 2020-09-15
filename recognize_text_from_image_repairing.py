@@ -9,6 +9,7 @@ import sys
 import time
 from utils import parse_metamodel_keywords
 import pyprind
+import numpy as np
 
 sys.argv.append("DejavuMonoSans")
 sys.argv.append("eng")
@@ -96,6 +97,6 @@ for i, match in enumerate(matches[oid:], start=oid):
 pool.close()
 pool.join()
 
-#print(out_path)
-#print(np.mean(ocr_times), np.std(ocr_times))
-#print(np.mean(pp_times), np.std(pp_times))
+print("\t\t*** Performance in font '%s' ***" % out_path)
+print("\t\t\t*** Average time spent in post-processing: %s ±%s ***" % (np.mean(pp_times), np.std(pp_times)))
+print("\t\t\t*** Average time spent on OCR recognition: %s ±%s ***" % (np.mean(ocr_times), np.std(ocr_times)))

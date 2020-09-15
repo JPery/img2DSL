@@ -6,5 +6,5 @@ __pycache__/*
 *.zip
 use-*
 !requirements.txt
-
 out.ecore
+env/*

@@ -37,6 +37,6 @@ for item in matches:
     if load_expression_in_use(item['file'], item['recognized_expression']):
         valid_expressions.append(item['id'])
     bar.update()
-print("Valid expressions in '%s': %s" %(font, len(valid_expressions)))
+print("\t\t*** Number of expressions correctly recognized for font '%s': %s / %s ***" %(font, len(valid_expressions), len(matches)))
 
 
