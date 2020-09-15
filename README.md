@@ -32,7 +32,7 @@ pip3 install -r requirements.txt
 
 ## Running
 
-To run the experiments with our OCL dataset, execute the process.sh script:
+To run the experiments with the OCL dataset from [2], execute the process.sh script:
 
 ``
 ./process.sh
