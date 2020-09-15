@@ -7,9 +7,10 @@ from utils import parse_metamodel_keywords
 import time
 import os
 import pyprind
+import numpy as np
 
 mng = Manager()
-sys.argv.append("DejavuMonoSans")
+
 out_path = sys.argv[1]
 lang_creation_time = mng.list()
 ocr_times = mng.list()
@@ -45,7 +46,7 @@ def do_recognize_in_process(index, ecore_file):
 matches = json.load(open("loaded_no_duplicated_filtered_expressions.json"))
 
 pool = Pool(1)
-bar = pyprind.ProgBar(max_id, track_time=True, title='Recognizing expressions from images', bar_char='█', update_interval=1.)
+bar = pyprind.ProgBar(len(matches), track_time=True, title='Recognizing expressions from images', bar_char='█', update_interval=1.)
 for i, match in enumerate(matches):
     pool.apply_async(do_recognize_in_process,
                      args=(i, match['file'],),
@@ -53,6 +54,7 @@ for i, match in enumerate(matches):
                      error_callback=lambda x: print(x))
 pool.close()
 pool.join()
-#print(out_path)
-#print(np.mean(lang_creation_time), np.std(lang_creation_time))
-#print(np.mean(ocr_times), np.std(ocr_times))
+
+print("\t\t*** Performance in font '%s' ***" % out_path)
+print("\t\t\t*** Average time spent creating language: %s ±%s ***" % (np.mean(lang_creation_time), np.std(lang_creation_time)))
+print("\t\t\t*** Average time spent on OCR recognition: %s ±%s ***" % (np.mean(ocr_times), np.std(ocr_times)))

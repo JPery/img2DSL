@@ -5,6 +5,7 @@ import sys
 import json
 import time
 import pyprind
+import numpy as np
 
 mng = Manager()
 out_path = sys.argv[1]
@@ -30,4 +31,6 @@ for i in range(max_id):
                       error_callback=lambda x: print(x))
 pool.close()
 pool.join()
-#print(np.mean(ocr_times), np.std(ocr_times))
+
+print("\t\t*** Performance in font '%s' ***" % out_path)
+print("\t\t\t*** Average time spent on OCR recognition: %s ±%s ***" % (np.mean(ocr_times), np.std(ocr_times)))
