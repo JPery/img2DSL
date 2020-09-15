@@ -32,13 +32,16 @@ pip3 install -r requirements.txt
 
 ## Running
 
-To re-run the experiments that we present in our paper [1], run the process.sh script:
+To run the experiments with our OCL dataset, execute the process.sh script:
 
 ``
 ./process.sh
 ``
 
+Note that the master branch contains the full OCL dataset from [2], which contains expressions that were not valid for our approach hence we did not use them in our paper [1]. To re-run the exact experiments that we present in our paper [1], please move to the branch SLE20-artifact.
 
 # Citation
 
 [1] Jorge Perianez, Roberto Rodriguez-Echeverria, Loli Burgueño, Jordi Cabot. Towards the Optical Character Recognition of DSLs. In Proc. of the ACM SIGPLAN International Conference on Software Language Engineering (SLE'20). 2020. To appear.
+
+[2] Jeroen Noten, Josh G. M. Mengerink, and Alexander Serebrenik. 2017.A Data Set of OCL Expressions on GitHub. InProceedings of the 14thInternational Conference on Mining Software Repositories (MSR'17). IEEE Press, 531–534.
