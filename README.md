@@ -43,5 +43,3 @@ Note that the master branch contains the full OCL [dataset](https://ieeexplore.i
 # Citation
 
 [1] Jorge Perianez, Roberto Rodriguez-Echeverria, Loli Burgueño, Jordi Cabot. Towards the Optical Character Recognition of DSLs. In Proc. of the ACM SIGPLAN International Conference on Software Language Engineering (SLE'20). 2020. To appear.
-
-[2] Jeroen Noten, Josh G. M. Mengerink, and Alexander Serebrenik. 2017.A Data Set of OCL Expressions on GitHub. InProceedings of the 14thInternational Conference on Mining Software Repositories (MSR'17). IEEE Press, 531–534.
