@@ -17,7 +17,9 @@ git clone --recurse-submodules https://github.com/JPery/img2DSL.git
 
 In order to ease the installation of all requirements and dependencies we've created an ``install.sh`` file.
 
-But you can install this requirements and dependencies on your own:
+You should run ``apt-get update`` in order to update repositories before running the script.
+
+You can also install this requirements and dependencies on your own:
 
 ### Requirements
 
