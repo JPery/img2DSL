@@ -46,10 +46,11 @@ To run the experiments with the OCL [dataset](https://ieeexplore.ieee.org/docume
 ./process.sh
 ``
 
-The estimated time to run the full experiment is 5 hours in an AMD Ryzen 9 3900X CPU.
+The estimated time to run the full experiment is 5 hours in an AMD Ryzen 9 3900X CPU with 32GB of RAM and a 512GB NVMe SSD disk in Ubuntu 20.04.
 
 Note that the master branch contains the full OCL [dataset](https://ieeexplore.ieee.org/document/7962414), which contains expressions that were not valid for our approach hence we did not use them in our paper [1]. To re-run the exact experiments that we present in our paper [1], please move to the branch SLE20-artifact.
 
 # Citation
 
-[1] Jorge Perianez, Roberto Rodriguez-Echeverria, Loli Burgueño, Jordi Cabot. Towards the Optical Character Recognition of DSLs. In Proc. of the ACM SIGPLAN International Conference on Software Language Engineering (SLE'20). 2020. To appear.
+[1] Jorge Perianez-Pascual, Roberto Rodriguez-Echeverria, Loli Burgueño, and Jordi Cabot. 2020. Towards the Optical Character Recognition of DSLs. In Proceedings of the 13th ACM SIGPLAN International Conference on Software Language Engineering (SLE ’20), November 16–17, 2020, Virtual, USA. ACM, New York, NY, USA, 7 pages. https://doi.org/10.1145/3426425.3426937
+
