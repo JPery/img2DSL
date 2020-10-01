@@ -46,6 +46,8 @@ To run the experiments with the OCL [dataset](https://ieeexplore.ieee.org/docume
 ./process.sh
 ``
 
+The estimated time to run the full experiment is 5 hours in an AMD Ryzen 9 3900X CPU.
+
 Note that the master branch contains the full OCL [dataset](https://ieeexplore.ieee.org/document/7962414), which contains expressions that were not valid for our approach hence we did not use them in our paper [1]. To re-run the exact experiments that we present in our paper [1], please move to the branch SLE20-artifact.
 
 # Citation
